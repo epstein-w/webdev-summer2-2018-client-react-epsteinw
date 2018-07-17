@@ -1,6 +1,6 @@
 import React from 'react';
 import '../../node_modules/font-awesome/css/font-awesome.min.css';
-
+import CourseList from './CourseList'
 export default class CourseManager
     extends React.Component {
     render() {
@@ -22,10 +22,15 @@ export default class CourseManager
                                 <th scope="col">  </th>
                             </tr>
                         </thead>
+                        <tbody>
+                            <CourseList/>
+                        </tbody>
                     </table>
 
                 </div>
             </div>
-        )}}
+        );
+    }
+}
 
 
