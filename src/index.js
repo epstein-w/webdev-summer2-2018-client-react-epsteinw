@@ -9,16 +9,19 @@ import CourseEditor from './CourseEditor'
 import Message from './Message'
 import Stateless from './Stateless'
 import '../node_modules/bootstrap/dist/css/bootstrap.css';
+import '../node_modules/font-awesome/css/font-awesome.min.css';
 
 
 ReactDOM.render(
     <div className="container-fluid">
         <h1> Whiteboard </h1>
+
+        <CourseManager/>
         {/*<Stateless message="Hello Broski"/>*/}
 
         {/*<Message message="Hello Bro" />*/}
 
-        <ModuleList/>
+        {/*<ModuleList/>*/}
 
         {/*<CourseEditor/>*/}
 
