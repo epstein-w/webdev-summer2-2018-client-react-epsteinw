@@ -8,6 +8,8 @@ import TopicPills from './TopicPills';
 import CourseEditor from './CourseEditor'
 import Message from './Message'
 import Stateless from './Stateless'
+import HelloWorld from './hello';
+import App from './App.js';
 import '../node_modules/bootstrap/dist/css/bootstrap.css';
 import '../node_modules/font-awesome/css/font-awesome.min.css';
 
@@ -16,7 +18,10 @@ ReactDOM.render(
     <div className="container-fluid">
         <h1> Whiteboard </h1>
 
-        <CourseManager/>
+        <App/>
+        {/*<ModuleList/>*/}
+
+        {/*<CourseManager/>*/}
         {/*<Stateless message="Hello Broski"/>*/}
 
         {/*<Message message="Hello Bro" />*/}

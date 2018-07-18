@@ -18,8 +18,6 @@ export default class CourseList extends React.Component {
     render() {
         return (
            this.renderListOfCourses()
-
-
         );
     }
 
