@@ -1,5 +1,5 @@
 import React from 'react'
-import ModuleList from './ModuleList'
+import ModuleList from './containers/ModuleList'
 import LessonTabs from './LessonTabs'
 export default class CourseEditor extends React.Component {
     render() {
