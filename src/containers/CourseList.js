@@ -4,13 +4,14 @@ import CourseCard from '../components/CourseCard'
 import CourseService from "../services/CourseService";
 
 class CourseList extends React.Component {
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
         this.courseService = CourseService.instance;
         this.titleChanged = this.titleChanged.bind(this);
         this.createCourse = this.createCourse.bind(this);
         this.deleteCourse = this.deleteCourse.bind(this);
         this.ownerChanged = this.ownerChanged.bind(this);
+        this.choseCourse = this.choseCourse.bind(this);
         this.state = {
             course: {},
             courses: []
@@ -104,6 +105,10 @@ class CourseList extends React.Component {
         console.log(courseId);
     };
 
+    choseCourse = (id) => {
+        this.props.courseSelectionHandler(id);
+    };
+
     render() {
         return (
             <div>
@@ -129,7 +134,7 @@ class CourseList extends React.Component {
                         <th> <i onClick={this.createCourse} className="fa fa-plus"></i></th>
                     </tr>
                     {this.state.courses.map((course, index) =>
-                    <CourseRow key={index} deleteCourse={this.deleteCourse} course={course}/>)}
+                    <CourseRow choseCourse={this.choseCourse} key={index} deleteCourse={this.deleteCourse} course={course}/>)}
                     </tbody>
                 </table>
             </div>

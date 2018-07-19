@@ -18,6 +18,13 @@ class CourseService {
             });
     }
 
+    findCourseById(id) {
+        return fetch (COURSE_API_URL + "/" + id)
+            .then(function response(response) {
+                return response.json();
+            });
+    }
+
     createCourse(course) {
         return fetch(COURSE_API_URL, {
             body: JSON.stringify(course),
@@ -27,7 +34,8 @@ class CourseService {
             method: 'POST'
         }).then(function (response) {
             return response.json();
-        })};
+        });
+    }
 
     deleteCourse(id) {
         return fetch(COURSE_API_URL + "/" + id,  {
@@ -35,6 +43,8 @@ class CourseService {
 
         })
      }
+
+
 
 }
 export default CourseService;

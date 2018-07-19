@@ -4,12 +4,13 @@ import CourseList from './CourseList'
 import CourseService from '../services/CourseService';
 
 export default class CourseManager extends React.Component {
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
         // this.courseService = CourseService.instance;
         this.state = { course: {title: ''},
             courses: [
                ]};
+        this.courseSelectionHandler = this.courseSelectionHandler.bind(this);
         // this.courseService.findAllCourses()
         //     .then(courses => {
         //         this.setState({courses: courses});
@@ -28,7 +29,9 @@ export default class CourseManager extends React.Component {
     //         .then(this.state.courses.push());
     // };
 
-
+    courseSelectionHandler = (index) => {
+        this.props.selectCourse(index);
+    }
 
     render() {
         return (
@@ -40,7 +43,7 @@ export default class CourseManager extends React.Component {
                         {/*<i onClick={this.createCourse}  className="fa fa-plus-square"></i>*/}
                     {/*</div>*/}
                 </nav>
-                <CourseList/>
+                <CourseList courseSelectionHandler={this.courseSelectionHandler}/>
 
                 </div>
 
