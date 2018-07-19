@@ -1,13 +1,11 @@
 import React from "react";
+import ReactDOM from 'react-dom';
 
-class HelloWorld extends React.Component {
-    render() {
-        return (
-            <div className="container-fluid">
-                <h1>Hello please</h1>
-            </div>
-        )
-    }
-}
+
+const HelloWorld = () => {
+    return (<h1>Hello World</h1>)
+};
+
+
 
 export default HelloWorld;
