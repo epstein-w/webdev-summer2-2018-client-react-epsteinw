@@ -11,12 +11,22 @@ export default class CourseList extends React.Component {
 
     render() {
         return (
-            <tr onClick={this.props.choseCourse(this.props.course.id)}>
-                <td> {this.props.course.title} </td>
-                <td> {this.props.course.creator} </td>
-                <td> {this.props.course.created} </td>
-                <td> </td>
-                <td> </td>
+            <tr >
+                <td onClick={() => {
+                    this.props.selectCourse(this.props.course.id);
+                }}> {this.props.course.title} </td>
+                <td onClick={() => {
+                    this.props.selectCourse(this.props.course.id);
+                }}> {this.props.course.creator} </td>
+                <td onClick={() => {
+                    this.props.selectCourse(this.props.course.id);
+                }}> {this.props.course.created} </td>
+                <td onClick={() => {
+                    this.props.selectCourse(this.props.course.id);
+                }}> </td>
+                <td onClick={() => {
+                    this.props.selectCourse(this.props.course.id);
+                }}> </td>
                 <td> <i onClick={()=>
                 {this.props.deleteCourse(this.props.course.id)}} className="fa fa-trash">
 

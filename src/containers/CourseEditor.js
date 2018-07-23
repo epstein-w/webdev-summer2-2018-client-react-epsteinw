@@ -3,24 +3,38 @@ import ModuleList from './ModuleList'
 import CourseService from '../services/CourseService'
 import LessonTabs from '../LessonTabs'
 export default class CourseEditor extends React.Component {
-    constructor() {
-        super();
-        this.service = CourseService.instance
+    constructor(props) {
+        super(props);
+        this.service = CourseService.instance;
         this.state = {
             course: {
                 modules: [{
                     title: '',
-
+                    courseId: ''
                 }]
+
             }
-        }
+        };
+        this.createModule = this.createModule.bind(this);
 
     }
+
+
     componentDidMount() {
-        console.log("dfajsdfakhlj");
-        this.service.findCourseById(92)
+        console.log(this.props.courseId);
+        this.service.findCourseById(this.props.courseId)
             .then(course => this.setState({course: course}));
     }
+
+
+    createModule = (module) => {
+        module.courseId = this.props.courseId;
+        console.log(module);
+
+        this.state.course.modules.push(module);
+        console.log(this.state.course.modules);
+        this.service.addModule(this.state.course.id, module).then(this.render());
+    };
 
     render() {
         return (
@@ -29,8 +43,10 @@ export default class CourseEditor extends React.Component {
                     {/*here we would call the name of teh course we were in*/}
                     Course {this.state.course.title}
                 </nav>
-                <h2>Modules</h2>
-                <ModuleList modules={this.state.course}/>
+                <div className="bg-light">
+                    <h2>Modules</h2>
+                    <ModuleList modules={this.state.course.modules} createModule={this.createModule}/>
+                </div>
             </div>
         );
     }

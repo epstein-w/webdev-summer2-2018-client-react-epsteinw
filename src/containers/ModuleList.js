@@ -8,24 +8,36 @@ export default class ModuleList extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
+            module: {
+                title: "",
+                courseId: '',
+                lessons: [
+                    {
+                        title: '',
+                        moduleId: ''
+                    }
+
+                ],
+            },
             selectedModuleIndex: 0
         };
 
         this.titleChanged = this.titleChanged.bind(this);
-        this.createModule = this.createModule.bind(this);
+        this.selectedModule = this.selectedModule.bind(this);
+        this.deleteModule = this.deleteModule.bind(this);
+        // this.createModule = this.createModule.bind(this);
     }
 
     titleChanged = (event) => {
-        this.setState({module: {title: event.target.value}});
-        console.log(this.state.module.title);
+        this.setState({module: {title: event.target.value, courseId: this.state.module.courseId}});
+
     };
 
-    createModule = () => {
-        this.ModuleServiceClient
-            .createModule(this.state.module)
-            .then(() => {
-                this.findAllModules();});
-    };
+    // createModule = () => {
+    //     this.ModuleServiceClient
+    //         .createModule(this.state.module)
+    //         .then(this.props.modules.push(this.state.module));
+    // };
 
     selectedModule = (index) => {
         console.log(index);
@@ -34,29 +46,36 @@ export default class ModuleList extends React.Component {
         });
     };
 
+    deleteModule = (index) => {
+        console.log(index);
+    };
+
     render() {
         return (
             <div>
 
                 <div className="bg-light">
                 <div className="col-sm-4 bg-secondary" >
-                    <ul className="list-group">
-                        {this.props.course.modules.map(
-                            (module, index) => {
-                                return (<ModuleListItem key={index} deleteModule={this.deleteModule} module={module}/>)})}
+                    <ul className="list-group list-group-flush">
+
+                        {this.props.modules.map(
+                            (module, i) => {
+                                return ( <li className="list-group-item" onClick={() => this.selectModule(i)} key={i}>{module.title}
+                                <i className="fa fa-pencil"></i>  <i className="fa fa-trash"></i>  </li>)
+                            }
+                        )}
+
+                        <li className="list-group-item">
+                            <input className="form-control" onChange={this.titleChanged} placeholder="Module" />
+                            <i onClick ={
+                                () => {this.props.createModule(this.state.module)}} className="fa fa-plus"></i>
+                        </li>
+
                     </ul>
-                    <div className="row">
-                        <div className="col-sm-10">
-                            <input onChange={this.titleChanged} value={this.state.module.title} className="form-control" placeholder="title"/>
-                        </div>
-                        <div className="col-sm-2">
-                        <button onClick={this.props.createModule(this.state)} className="btn btn-primary btn-block"> <i className="fa fa-plus"></i></button>
-                        </div>
-                    </div>
+
                 </div>
                 <div className="col-sm-8">
-
-                    {/*{this.renderListOfLessons}*/}
+                    {this.renderListOfLessons()}
                 </div>
                 </div>
             </div>

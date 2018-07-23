@@ -7,10 +7,10 @@ export default class CourseManager extends React.Component {
     constructor(props) {
         super(props);
         // this.courseService = CourseService.instance;
-        this.state = { course: {title: ''},
+        this.state = { course: {title: '', courseId:''},
             courses: [
                ]};
-        this.courseSelectionHandler = this.courseSelectionHandler.bind(this);
+
         // this.courseService.findAllCourses()
         //     .then(courses => {
         //         this.setState({courses: courses});
@@ -29,9 +29,7 @@ export default class CourseManager extends React.Component {
     //         .then(this.state.courses.push());
     // };
 
-    courseSelectionHandler = (index) => {
-        this.props.selectCourse(index);
-    }
+
 
     render() {
         return (
@@ -43,7 +41,7 @@ export default class CourseManager extends React.Component {
                         {/*<i onClick={this.createCourse}  className="fa fa-plus-square"></i>*/}
                     {/*</div>*/}
                 </nav>
-                <CourseList courseSelectionHandler={this.courseSelectionHandler}/>
+                <CourseList selectCourse={this.props.selectCourse}/>
 
                 </div>
 

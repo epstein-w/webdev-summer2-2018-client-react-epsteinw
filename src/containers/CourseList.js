@@ -11,7 +11,7 @@ class CourseList extends React.Component {
         this.createCourse = this.createCourse.bind(this);
         this.deleteCourse = this.deleteCourse.bind(this);
         this.ownerChanged = this.ownerChanged.bind(this);
-        this.choseCourse = this.choseCourse.bind(this);
+
         this.state = {
             course: {},
             courses: []
@@ -105,9 +105,7 @@ class CourseList extends React.Component {
         console.log(courseId);
     };
 
-    choseCourse = (id) => {
-        this.props.courseSelectionHandler(id);
-    };
+
 
     render() {
         return (
@@ -134,7 +132,7 @@ class CourseList extends React.Component {
                         <th> <i onClick={this.createCourse} className="fa fa-plus"></i></th>
                     </tr>
                     {this.state.courses.map((course, index) =>
-                    <CourseRow choseCourse={this.choseCourse} key={index} deleteCourse={this.deleteCourse} course={course}/>)}
+                    <CourseRow selectCourse={this.props.selectCourse} key={index} deleteCourse={this.deleteCourse} course={course}/>)}
                     </tbody>
                 </table>
             </div>

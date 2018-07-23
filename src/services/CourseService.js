@@ -44,6 +44,19 @@ class CourseService {
         })
      }
 
+    addModule(id, module) {
+        return fetch(COURSE_API_URL + '/' + id + '/module', {
+            method: 'POST',
+            body: JSON.stringify(module),
+            headers: {
+                'Content-Type': 'application/json'
+
+            }
+        }).then (function (response) {
+            return response.json();
+        });
+    }
+
 
 
 }
