@@ -1,8 +1,9 @@
 import React from 'react';
 // import React, {Component} from 'react';
 import '../../node_modules/bootstrap/dist/css/bootstrap.css';
-import ModuleServiceClient from '../services/ModuleServiceClient'
-import ModuleListItem from '../components/ModuleListItem'
+import ModuleServiceClient from '../services/ModuleServiceClient';
+import ModuleListItem from '../components/ModuleListItem';
+import LessonList from './LessonList';
 
 export default class ModuleList extends React.Component {
     constructor(props) {
@@ -11,13 +12,9 @@ export default class ModuleList extends React.Component {
             module: {
                 title: "",
                 courseId: '',
-                lessons: [
-                    {
-                        title: '',
-                        moduleId: ''
-                    }
-
-                ],
+                lessons: [{
+                    title: ''
+                }],
             },
             selectedModuleIndex: 0
         };
@@ -30,6 +27,9 @@ export default class ModuleList extends React.Component {
 
     titleChanged = (event) => {
         this.setState({module: {title: event.target.value, courseId: this.state.module.courseId}});
+        console.log(this.state.selectedModuleIndex);
+        console.log(this.props.modules);
+        console.log(this.props.modules.lessons)
 
     };
 
@@ -50,32 +50,37 @@ export default class ModuleList extends React.Component {
         console.log(index);
     };
 
+
+
     render() {
         return (
             <div>
 
                 <div className="bg-light">
-                <div className="col-sm-4 bg-secondary" >
-                    <ul className="list-group list-group-flush">
+                <div className="row">
+                    <div className="col-sm-4 bg-secondary" >
+                        <ul className="list-group list-group-flush">
 
-                        {this.props.modules.map(
-                            (module, i) => {
-                                return ( <li className="list-group-item" onClick={() => this.selectModule(i)} key={i}>{module.title}
-                                <i className="fa fa-pencil"></i>  <i className="fa fa-trash"></i>  </li>)
-                            }
-                        )}
+                            {this.props.modules.map(
+                                (module, i) => {
+                                    return ( <li className="list-group-item" onClick={() => this.selectModule(i)} key={i}>{module.title}
+                                    <i className="fa fa-pencil"></i>  <i className="fa fa-trash"></i>  </li>)
 
-                        <li className="list-group-item">
-                            <input className="form-control" onChange={this.titleChanged} placeholder="Module" />
-                            <i onClick ={
-                                () => {this.props.createModule(this.state.module)}} className="fa fa-plus"></i>
-                        </li>
+                                }
+                            )}
 
-                    </ul>
+                            <li className="list-group-item">
+                                <input className="form-control" onChange={this.titleChanged} placeholder="Module" />
+                                <i onClick ={
+                                    () => {this.props.createModule(this.state.module)}} className="fa fa-plus"></i>
+                            </li>
 
-                </div>
-                <div className="col-sm-8">
-                    {this.renderListOfLessons()}
+                        </ul>
+
+                    </div>
+                    <div className="col-sm-8">
+                        <LessonList lesson={this.props.modules[this.state.selectedModuleIndex]}/>
+                    </div>
                 </div>
                 </div>
             </div>
@@ -84,8 +89,6 @@ export default class ModuleList extends React.Component {
     }
 
 
-    // renderListOfLessons = () => {
-    //     return <LessonList  key={this.state.modules[0].id} lessons={this.state.modules[0].lessons}>;
-    // }
+
 }
 

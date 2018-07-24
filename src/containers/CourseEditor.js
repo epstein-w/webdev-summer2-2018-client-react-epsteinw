@@ -10,7 +10,8 @@ export default class CourseEditor extends React.Component {
             course: {
                 modules: [{
                     title: '',
-                    courseId: ''
+                    courseId: '',
+                    lessons: []
                 }]
 
             }
