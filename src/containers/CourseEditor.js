@@ -11,12 +11,16 @@ export default class CourseEditor extends React.Component {
                 modules: [{
                     title: '',
                     courseId: '',
-                    lessons: []
+                    lessons: [{}]
                 }]
 
             }
         };
         this.createModule = this.createModule.bind(this);
+        this.renderModuleList = this.renderModuleList.bind(this);
+        this.deleteModule = this.deleteModule.bind(this);
+        this.createLesson = this.createLesson.bind(this);
+        this.deleteLesson = this.deleteLesson.bind(this);
 
     }
 
@@ -34,8 +38,37 @@ export default class CourseEditor extends React.Component {
 
         this.state.course.modules.push(module);
         console.log(this.state.course.modules);
-        this.service.addModule(this.state.course.id, module).then(this.render());
+        this.service.addModule(this.state.course.id, module);
     };
+
+    deleteModule = (mid) =>{
+        console.log(mid);
+        console.log(this.state.course.modules[mid]);
+        this.service.deleteModule(this.state.course.id, this.state.course.modules[mid].id)
+            .then(this.renderModuleList);
+    };
+
+    renderModuleList = () => {
+        return (<ModuleList modules={this.state.course.modules} createModule={this.createModule} deleteModule={this.deleteModule} createLesson={this.createLesson} deleteLesson={this.deleteLesson} />)
+    };
+
+    createLesson = (lesson, mindex) => {
+        console.log(lesson);
+        console.log(mindex);
+        console.log(this.state.course.modules[mindex].id)
+        this.service.createLesson(lesson, this.state.course.modules[mindex].id)
+            .then(this.renderModuleList());
+
+    };
+
+    deleteLesson = (lid, mid) => {
+        console.log(lid);
+        console.log(mid);
+        console.log(this.state.course.modules[mid].id);
+        this.service.deleteLesson(lid, this.state.course.modules[mid].id)
+            .then(this.renderModuleList)
+    };
+
 
     render() {
         return (
@@ -46,7 +79,7 @@ export default class CourseEditor extends React.Component {
                 </nav>
                 <div className="bg-light">
                     <h2>Modules</h2>
-                    <ModuleList modules={this.state.course.modules} createModule={this.createModule}/>
+                    {this.renderModuleList()}
                 </div>
             </div>
         );

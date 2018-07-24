@@ -1,8 +1,8 @@
 import React from 'react';
-// import React, {Component} from 'react';
 import '../../node_modules/bootstrap/dist/css/bootstrap.css';
 import ModuleServiceClient from '../services/ModuleServiceClient';
 import ModuleListItem from '../components/ModuleListItem';
+import LessonService from '../services/LessonService'
 import LessonList from './LessonList';
 
 export default class ModuleList extends React.Component {
@@ -18,18 +18,17 @@ export default class ModuleList extends React.Component {
             },
             selectedModuleIndex: 0
         };
-
+        this.lessonService = LessonService.instance;
         this.titleChanged = this.titleChanged.bind(this);
         this.selectedModule = this.selectedModule.bind(this);
         this.deleteModule = this.deleteModule.bind(this);
+        // this.createLesson = this.createLesson.bind(this);
         // this.createModule = this.createModule.bind(this);
     }
 
     titleChanged = (event) => {
         this.setState({module: {title: event.target.value, courseId: this.state.module.courseId}});
         console.log(this.state.selectedModuleIndex);
-        console.log(this.props.modules);
-        console.log(this.props.modules.lessons)
 
     };
 
@@ -47,10 +46,25 @@ export default class ModuleList extends React.Component {
     };
 
     deleteModule = (index) => {
-        console.log(index);
+        this.props.deleteModule(index);
     };
 
 
+    checkLessons = () => {
+        if (this.props.modules.length) {
+            return <LessonList lessons={this.props.modules[this.state.selectedModuleIndex].lessons}
+                        mIndex={this.state.selectedModuleIndex}
+                        createLesson={this.props.createLesson}
+                        deleteLesson={this.props.deleteLesson}
+            />
+        } else {
+            return <LessonList lessons={[]}
+                        mIndex={this.state.selectedModuleIndex}
+                        createLesson={this.props.createLesson}
+                        deleteLesson={this.props.deleteLesson}
+            />
+        }
+    }
 
     render() {
         return (
@@ -63,8 +77,8 @@ export default class ModuleList extends React.Component {
 
                             {this.props.modules.map(
                                 (module, i) => {
-                                    return ( <li className="list-group-item" onClick={() => this.selectModule(i)} key={i}>{module.title}
-                                    <i className="fa fa-pencil"></i>  <i className="fa fa-trash"></i>  </li>)
+                                    return ( <li onClick={() => this.selectedModule(i)} className="list-group-item" key={i}>{module.title}
+                                    <i className="fa fa-pencil"></i>  <i onClick ={() => this.deleteModule(i)} className="fa fa-trash"></i>  </li>)
 
                                 }
                             )}
@@ -79,7 +93,7 @@ export default class ModuleList extends React.Component {
 
                     </div>
                     <div className="col-sm-8">
-                        <LessonList lesson={this.props.modules[this.state.selectedModuleIndex]}/>
+                        {this.checkLessons()}
                     </div>
                 </div>
                 </div>

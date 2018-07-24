@@ -1,9 +1,11 @@
-import React from 'react';
-import CourseRow from '../components/CourseRow'
-import CourseCard from './CourseCardList'
+import React from 'react'
+// import React, {Component} from 'react'
+import '../../node_modules/bootstrap/dist/css/bootstrap.css';
+import '../../node_modules/font-awesome/css/font-awesome.min.css';
 import CourseService from "../services/CourseService";
+import CourseCard from "../components/CourseCard"
 
-class CourseList extends React.Component {
+export default class CourseList extends React.Component {
     constructor(props) {
         super(props);
         this.courseService = CourseService.instance;
@@ -31,13 +33,14 @@ class CourseList extends React.Component {
             })
     }
 
+
     titleChanged(event) {
         var date = new Date();
         console.log(event.target.value);
         this.setState({
             course: { title: event.target.value,
-                      created: date.toISOString(),
-                      creator: this.state.course.creator}
+                created: date.toISOString(),
+                creator: this.state.course.creator}
         });
     }
 
@@ -74,35 +77,18 @@ class CourseList extends React.Component {
     render() {
         return (
             <div>
-                <h2>Course List</h2>
-                <table className="table table-striped table-bordered table-hover">
-                    <thead className="thead-light">
-                    <tr>
-                        <th scope="col"> Title </th>
-                        <th scope="col"> Owned By </th>
-                        <th scope="col"> Created </th>
-                        <th scope="col"> <i onClick={()=> {
-                            this.props.switchView(); }} className="fa fa-table"></i> </th>
-                        <th scope="col"> <i className="fa fa-sort-alpha-asc"></i> </th>
-                        <th scope="col">  </th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr>
-                        <th> <input className="form-control" onChange={this.titleChanged} placeholder="Title" /> </th>
-                        <th> <input className="form-control" onChange={this.ownerChanged} placeholder="Owner" /> </th>
-                        <th> </th>
-                        <th> </th>
-                        <th> </th>
-                        <th> <i onClick={this.createCourse} className="fa fa-plus"></i></th>
-                    </tr>
-                    {this.state.courses.map((course, index) =>
-                    <CourseRow selectCourse={this.props.selectCourse} key={index} deleteCourse={this.deleteCourse} course={course}/>)}
-                    </tbody>
-                </table>
-            </div>
-        )
-    }
+                <h2>Course Cards <i onClick={()=> {
+                    this.props.switchView(); }} className="fa fa-table"></i> </h2>
 
+                <div className="card-deck">
+                    {this.state.courses.map((course, index) =>
+                        <CourseCard selectCourse={this.props.selectCourse} key={index} deleteCourse={this.deleteCourse} course={course}/>)}
+                </div>
+
+
+
+
+            </div>
+        );
+    }
 }
-export default CourseList;

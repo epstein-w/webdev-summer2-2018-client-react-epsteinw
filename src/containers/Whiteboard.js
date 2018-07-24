@@ -1,7 +1,7 @@
 import React from 'react';
 
 import CourseManager from './CourseManager';
-import CourseCard from '../components/CourseCard';
+import CourseCard from './CourseCardList';
 import ModuleList from './ModuleList';
 import LessonTabs from '../LessonTabs';
 import TopicPills from '../TopicPills';

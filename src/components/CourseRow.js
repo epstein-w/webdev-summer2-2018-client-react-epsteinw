@@ -6,7 +6,7 @@ import '../../node_modules/font-awesome/css/font-awesome.min.css';
 export default class CourseList extends React.Component {
     constructor(props) {
         super(props);
-        console.log("got here");
+
     }
 
     render() {

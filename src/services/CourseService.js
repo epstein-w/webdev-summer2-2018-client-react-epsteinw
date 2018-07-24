@@ -57,6 +57,26 @@ class CourseService {
         });
     }
 
+    deleteModule(cid, mid) {
+        return fetch(COURSE_API_URL + "/" + cid + "/module/" + mid,  {
+            method: 'DELETE'
+        });
+    }
+
+    createLesson(lesson, moduleId) {
+        return fetch (COURSE_API_URL + "/module/" + moduleId + "/lesson", {
+            body: JSON.stringify(lesson),
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            method: 'POST'
+        });
+    }
+    deleteLesson(lid, mid) {
+        return fetch (COURSE_API_URL + "/module/" + mid + "/lesson/" + lid, {
+            method: 'DELETE'
+        } )
+    }
 
 
 }
