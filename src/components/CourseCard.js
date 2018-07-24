@@ -1,22 +1,21 @@
-import React from 'react'
-// import React, {Component} from 'react'
-import '../../node_modules/bootstrap/dist/css/bootstrap.css';
-import '../../node_modules/font-awesome/css/font-awesome.min.css';
+import React from "react";
 
 export default class CourseList extends React.Component {
     constructor(props) {
         super(props);
-        console.log("got here");
+
     }
 
     render() {
         return (
             <div className="card" styles={{width: '18rem'}}>
-                <div className="card-body">
+
+                    <div className="card-body" onClick={() => {
+                        this.props.selectCourse(this.props.course.id);
+                    }}>
                     <h5 className="card-title">{this.props.course.title}</h5>
-                    <a href="#" className="btn btn-primary">More...</a>
-                </div>
-            </div>
-        );
+                    </div>
+            </div>);
+
     }
 }

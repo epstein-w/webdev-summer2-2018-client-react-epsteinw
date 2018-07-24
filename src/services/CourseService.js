@@ -44,6 +44,39 @@ class CourseService {
         })
      }
 
+    addModule(id, module) {
+        return fetch(COURSE_API_URL + '/' + id + '/module', {
+            method: 'POST',
+            body: JSON.stringify(module),
+            headers: {
+                'Content-Type': 'application/json'
+
+            }
+        }).then (function (response) {
+            return response.json();
+        });
+    }
+
+    deleteModule(cid, mid) {
+        return fetch(COURSE_API_URL + "/" + cid + "/module/" + mid,  {
+            method: 'DELETE'
+        });
+    }
+
+    createLesson(lesson, moduleId) {
+        return fetch (COURSE_API_URL + "/module/" + moduleId + "/lesson", {
+            body: JSON.stringify(lesson),
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            method: 'POST'
+        });
+    }
+    deleteLesson(lid, mid) {
+        return fetch (COURSE_API_URL + "/module/" + mid + "/lesson/" + lid, {
+            method: 'DELETE'
+        } )
+    }
 
 
 }
