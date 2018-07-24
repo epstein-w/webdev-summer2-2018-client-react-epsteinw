@@ -1,7 +1,6 @@
 import React from 'react'
 import ModuleList from './ModuleList'
 import CourseService from '../services/CourseService'
-import LessonTabs from '../LessonTabs'
 export default class CourseEditor extends React.Component {
     constructor(props) {
         super(props);
