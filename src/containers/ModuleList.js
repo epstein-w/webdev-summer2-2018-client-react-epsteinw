@@ -4,6 +4,7 @@ import ModuleServiceClient from '../services/ModuleServiceClient';
 import ModuleListItem from '../components/ModuleListItem';
 import LessonService from '../services/LessonService'
 import LessonList from './LessonList';
+import WidgetListContainer from './widgets/WidgetListConainter'
 
 export default class ModuleList extends React.Component {
     constructor(props) {
@@ -94,6 +95,7 @@ export default class ModuleList extends React.Component {
                     </div>
                     <div className="col-sm-8">
                         {this.checkLessons()}
+                        <WidgetListContainer/>
                     </div>
                 </div>
                 </div>
