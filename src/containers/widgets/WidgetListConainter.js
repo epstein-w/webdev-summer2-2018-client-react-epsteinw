@@ -14,10 +14,15 @@ const dispatcherToPropertyMapper = dispatch => (
             type: 'DELETE_WIDGET',
             widgetId: widgetId
         }),
-        createWidget: (widgetTitle) => dispatch ({
+        createWidget: (widget) => dispatch ({
             type: 'CREATE_WIDGET',
-            widgetTitle: widgetTitle
+            widget: widget
+        }),
+        updateWidget: (widget) => dispatch ({
+            type: 'UPDATE_WIDGET',
+            widget: widget
         })
+
     }
 )
 
