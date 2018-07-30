@@ -7,11 +7,13 @@ import {HeadingWidget} from "./HeadingWidget";
 import {ListWidget} from "./ListWidget";
 import {YoutubeWidget} from "./YoutubeWidget";
 
-const WidgetListComponent = ({widgets, deleteWidget, createWidget, updateWidget}) => {
+const WidgetListComponent = ({widgets, deleteWidget, createWidget, updateWidget, saveWidgets}) => {
     let widgetTitle;
     let widgetSelectType;
     return(
         <div>
+            <button onClick={saveWidgets}
+                className="btn btn-primary float-right" > Save </button>
             <h1>Widget List ({widgets.length}) </h1>
             <ul className="list-group">
                 <li className="list-group-item">

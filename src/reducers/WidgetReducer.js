@@ -1,8 +1,8 @@
 
 let initialState = {
         widgets: [
-            {title: 'Youtube 1', id: 8, widgetType: 'YOUTUBE'},
-            {title: 'Header 1', id: 9, widgetType: 'HEADING'},
+            {title: 'Youtube 1', id: 8, widgetType: 'YOUTUBE', src: 'qMXNC5KeD0I'},
+            {title: 'Header 1', id: 9, widgetType: 'HEADING', size: 1},
             {title: 'List 1', id: 10, widgetType: 'LIST', ordered: true, listItems: 'item1\nitem2\nitem3'},
             {title: 'Widget 1', id: 11, widgetType: 'WT1'},
             {title: 'Widget 2', id: 12, widgetType: 'WT2'},
@@ -12,6 +12,15 @@ let initialState = {
 
 const WidgetReducer = (state = initialState, action) => {
     switch (action.type) {
+        case 'SAVE_WIDGETS':
+            fetch('http://localhost:8080/api/widget', {
+                method: 'post',
+                headers: {
+                    'content-type': 'application/json'
+                },
+                body: JSON.stringify(state.widgets)
+            });
+            return state;
         case 'DELETE_WIDGET':
             return  {
                 widgets: state.widgets.filter(widget => widget.id !== action.widgetId)

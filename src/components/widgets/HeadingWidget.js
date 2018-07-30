@@ -17,7 +17,7 @@ export const HeadingWidget = ({widget, updateWidget}) => {
             <label className="form-control" htmlFor="size">
                 Heading Size
                 <select onChange={() => {
-                    widget.size = size.value;
+                    widget.size = parseInt(size.value);
                     updateWidget(widget);
                 }} ref={node => size = node} id="size" className="form-control">
                     <option value="1"> Heading 1 </option>
@@ -30,10 +30,10 @@ export const HeadingWidget = ({widget, updateWidget}) => {
 
             <h4>Preview</h4>
 
-            {widget.size === "1" && <h1>{widget.text}</h1>}
-            {widget.size === "2" && <h2>{widget.text}</h2>}
-            {widget.size === "3" && <h3>{widget.text}</h3>}
-            {widget.size === "4" && <h4>{widget.text}</h4>}
+            {widget.size === 1 && <h1>{widget.text}</h1>}
+            {widget.size === 2 && <h2>{widget.text}</h2>}
+            {widget.size === 3 && <h3>{widget.text}</h3>}
+            {widget.size === 4 && <h4>{widget.text}</h4>}
         </div>
     )
 }
