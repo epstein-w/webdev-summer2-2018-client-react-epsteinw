@@ -1,16 +1,27 @@
 import React from 'react'
 import ModuleList from './ModuleList'
 import CourseService from '../services/CourseService'
-export default class CourseEditor extends React.Component {
+
+class CourseEditor extends React.Component {
     constructor(props) {
         super(props);
         this.service = CourseService.instance;
         this.state = {
             course: {
+                id: '',
+                created: '',
+                modified: '',
+                title: '',
+                creator: '',
                 modules: [{
                     title: '',
+                    id: '',
                     courseId: '',
-                    lessons: [{}]
+                    lessons: [{
+                        id: '',
+                        lessonId: '',
+                        widgets: [{}]
+                    }]
                 }]
 
             }
@@ -25,9 +36,10 @@ export default class CourseEditor extends React.Component {
 
 
     componentDidMount() {
-        console.log(this.props.courseId);
+
         this.service.findCourseById(this.props.courseId)
             .then(course => this.setState({course: course}));
+        console.log(this.state.course);
     }
 
 
@@ -84,3 +96,5 @@ export default class CourseEditor extends React.Component {
         );
     }
 }
+
+export default CourseEditor;
