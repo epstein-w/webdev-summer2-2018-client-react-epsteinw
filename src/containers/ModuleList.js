@@ -95,7 +95,7 @@ export default class ModuleList extends React.Component {
                     </div>
                     <div className="col-sm-8">
                         {this.checkLessons()}
-                        <WidgetListContainer/>
+
                     </div>
                 </div>
                 </div>

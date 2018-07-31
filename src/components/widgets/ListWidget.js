@@ -3,6 +3,7 @@ import React from 'react';
 export const ListWidget = ({widget, updateWidget}) => {
     let textArea;
     let checkBox;
+
     return (
         <div>
             <h3>List Widget - {widget.title}</h3>
@@ -23,7 +24,7 @@ export const ListWidget = ({widget, updateWidget}) => {
             <h4>Preview</h4>
             {!widget.ordered &&
             <ul>
-                {widget.listItems.split('\n').map((item, index) => (
+                {widget.listItems && widget.listItems.split('\n').map((item, index) => (
                     <li key={index}>{item}</li>
                 ))}
             </ul>
@@ -31,7 +32,7 @@ export const ListWidget = ({widget, updateWidget}) => {
 
             {widget.ordered &&
             <ol>
-                {widget.listItems.split('\n').map((item, index) => (
+                {widget.listItems && widget.listItems.split('\n').map((item, index) => (
                     <li key={index}>{item}</li>
                 ))}
             </ol>

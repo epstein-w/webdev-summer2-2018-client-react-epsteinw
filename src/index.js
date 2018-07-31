@@ -7,7 +7,6 @@ import '../node_modules/bootstrap/dist/css/bootstrap.css';
 import '../node_modules/font-awesome/css/font-awesome.min.css';
 import WhiteBoard from "./containers/Whiteboard";
 
-import WidgetListContainer from './containers/widgets/WidgetListConainter'
 import WidgetReducer  from './reducers/WidgetReducer'
 
 let store = createStore(WidgetReducer)
@@ -16,8 +15,8 @@ let store = createStore(WidgetReducer)
 ReactDOM.render(
     <Provider store={store}>
         <div className="container-fluid">
-            <WidgetListContainer/>
-           {/*<WhiteBoard/>*/}
+
+           <WhiteBoard/>
         </div>
     </Provider>,
     document.getElementById('root')

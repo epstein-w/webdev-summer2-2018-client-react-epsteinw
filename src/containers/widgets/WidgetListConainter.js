@@ -1,12 +1,22 @@
 import {connect} from 'react-redux'
+
+import CourseEditor from '../CourseEditor'
 import WidgetListComponent from '../../components/widgets/WidgetListComponent'
 
 
-const stateToPropertyMapper = state => (
-    {
-        widgets: state.widgets
-    }
-)
+const stateToPropertyMapper = (state, ownProps) => {
+    let check = ownProps.lesson;
+
+    console.log("ownProps:");
+    console.log(ownProps);
+    console.log("state:");
+    console.log(state);
+    state.lesson = ownProps.lesson;
+    return {
+        widgets: state.widgets,
+        lesson: state.lesson
+    };
+}
 
 const dispatcherToPropertyMapper = dispatch => (
     {
@@ -24,6 +34,28 @@ const dispatcherToPropertyMapper = dispatch => (
         }),
         saveWidgets: () => dispatch ({
             type: 'SAVE_WIDGETS'
+        }),
+        loadAllWidgets: (id) => {
+            fetch('http://localhost:8080/api/widget/' + id)
+                .then(response => response.json())
+                .then(widgets => dispatch({
+                    type: 'FIND_ALL_WIDGETS',
+                    widgets: widgets
+                }))
+        },
+        up: (widgetId) => dispatch ({
+            type: 'WIDGET_UP',
+            widgetId: widgetId
+        }),
+
+        down: (widgetId) => dispatch ({
+            type: 'WIDGET_DOWN',
+            widgetId: widgetId
+        }),
+
+        lessonSelect: (lessonId) => dispatch ({
+            type: 'LESSON_SELECT',
+            lessonId: lessonId
         })
 
     }
