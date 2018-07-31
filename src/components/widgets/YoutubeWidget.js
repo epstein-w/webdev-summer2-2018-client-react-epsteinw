@@ -2,6 +2,7 @@ import React from 'react'
 
 export const YoutubeWidget = ({widget, updateWidget}) => {
     let src;
+    let name;
     return(
         <div>
             <h3> Youtube Widget</h3>
@@ -11,7 +12,12 @@ export const YoutubeWidget = ({widget, updateWidget}) => {
                updateWidget(widget);
             }} id='URL' className='form-control'/>
             </label>
-
+            <label>
+                <input className="form-control" onChange={() => {
+                    widget.title = name.value;
+                    updateWidget(widget)
+                }} ref = {node => name = node}  placeholder="Widget Name"/>
+            </label>
             <h4> Preview </h4>
 
             <iframe width="560" height="315"

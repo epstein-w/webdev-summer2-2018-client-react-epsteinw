@@ -1,11 +1,16 @@
 import React from 'react';
-import LessonService from '../services/LessonService'
+// import LessonService from '../services/LessonService'
+import WidgetService from '../services/WidgetSerivce'
 import WidgetListContainer from './widgets/WidgetListConainter'
+
+import {dispatcherToPropertyMapper} from "../actions/WidgetActions";
+
 
 export default class LessonList extends React.Component {
     constructor(props) {
         super(props);
-        this.lessonService = LessonService.instance;
+        // this.lessonService = LessonService.instance;
+        this.widgetService = WidgetService.instance;
         this.state = {
             mIndex: this.props.mIndex,
             selectedLessonIndex: 0,
@@ -16,6 +21,7 @@ export default class LessonList extends React.Component {
         };
         this.titleChanged = this.titleChanged.bind(this);
         this.selectLesson = this.selectLesson.bind(this);
+
     }
 
     titleChanged = (event) => {
@@ -32,6 +38,12 @@ export default class LessonList extends React.Component {
             selectLessonIndex: index,
             lesson: this.state.lesson
         });
+        // console.log("as");
+        // console.log(this.widgetService);
+        console.log(this.props.lessons);
+        this.widgetService.changeSel(this.props.lessons[index].id)
+
+
 
     };
 
@@ -63,8 +75,8 @@ export default class LessonList extends React.Component {
                     </ul>
                 </div>
                 <div>
-                    {console.log("lesson print: " + this.props.lessons[this.state.selectedLessonIndex].id)}
-                    <WidgetListContainer lesson={this.props.lessons[this.state.selectedLessonIndex]}/>
+                    {/*{console.log("lesson print: " + this.props.lessons[this.state.selectedLessonIndex].id)}*/}
+                    <WidgetListContainer/>
                 </div>
             </div>
         );

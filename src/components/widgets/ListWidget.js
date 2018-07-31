@@ -3,7 +3,7 @@ import React from 'react';
 export const ListWidget = ({widget, updateWidget}) => {
     let textArea;
     let checkBox;
-
+    let name;
     return (
         <div>
             <h3>List Widget - {widget.title}</h3>
@@ -21,6 +21,13 @@ export const ListWidget = ({widget, updateWidget}) => {
                         }}
                 />Ordered
             </label>
+            <label>
+                <input className="form-control" onChange={() => {
+                    widget.title = name.value;
+                    updateWidget(widget)
+                }} ref = {node => name = node}  placeholder="Widget Name"/>
+            </label>
+
             <h4>Preview</h4>
             {!widget.ordered &&
             <ul>

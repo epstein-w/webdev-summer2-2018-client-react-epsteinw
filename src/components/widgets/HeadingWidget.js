@@ -3,11 +3,12 @@ import React from 'react'
 export const HeadingWidget = ({widget, updateWidget}) => {
     let text;
     let size;
+    let name;
     return (
         <div>
         <h1> {widget.title} </h1>
             <label className="form-control" htmlFor="text">
-                Heading Text {}
+                Heading Text
                 <input onChange={() => {
                     widget.text = text.value;
                     updateWidget(widget);
@@ -26,7 +27,12 @@ export const HeadingWidget = ({widget, updateWidget}) => {
                     <option value="4"> Heading 4 </option>
                 </select>
             </label>
-
+            <label>
+                <input className="form-control" onChange={() => {
+                    widget.title = name.value;
+                    updateWidget(widget)
+                }} ref = {node => name = node}  placeholder="Widget Name"/>
+            </label>
 
             <h4>Preview</h4>
 
