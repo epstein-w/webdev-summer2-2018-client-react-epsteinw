@@ -16,7 +16,7 @@ class WidgetListComponent extends React.Component
         super(props);
         let widgetTitle;
         let widgetSelectType;
-        this.props.loadAllWidgets(this.props.selectedLesson);
+        this.props.loadAllWidgets(this.props.lessonId);
         console.log("this props");
         console.log(this.props);
         this.widgetService = WidgetService.instance;
@@ -35,7 +35,9 @@ class WidgetListComponent extends React.Component
     }
 
     tick() {
+
        this.props.reCheck(this.widgetService.getCurSel());
+
     }
 
     render() {

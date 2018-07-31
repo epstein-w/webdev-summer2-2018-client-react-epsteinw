@@ -1,7 +1,7 @@
 let _singleton = Symbol();
-let curSel = 112
-// const API_URL = "https://obscure-mountain-36147.herokuapp.com/api";
-const API_URL = "http://localhost:8080/api";
+let curSel = 112;
+const API_URL = "https://obscure-mountain-36147.herokuapp.com/api";
+// const API_URL = "http://localhost:8080/api";
 class WidgetSerivce {
     constructor(singletonToken) {
         if (_singleton !== singletonToken)
@@ -16,6 +16,7 @@ class WidgetSerivce {
 
     changeSel(id) {
        curSel = id;
+       return this.loadAllWidgets();
 
     }
 
@@ -23,7 +24,7 @@ class WidgetSerivce {
         return curSel;
     }
 
-    
+
 
     loadAllWidgets () {
         return fetch(API_URL + '/lesson/' + curSel + '/widget' )

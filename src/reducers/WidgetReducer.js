@@ -10,7 +10,7 @@ let initialState = {
             // {title: 'Widget 3', id: 13, widgetType: 'WT3'},
             // {title: 'Widget 4', id: 14, widgetType: 'WT1'}
             ],
-    selectedLesson: 112,
+    lessonId: 112,
     counter: 0
 };
 
@@ -57,7 +57,7 @@ const WidgetReducer = (state = initialState, action) => {
         case 'FIND_ALL_WIDGETS':
 
             initialState = action.widgets;
-
+            state.changed = false;
             action.widgets.sort((a, b) => {return a.position - b.position });
 
             return {widgets: action.widgets};
@@ -105,13 +105,24 @@ const WidgetReducer = (state = initialState, action) => {
                 widgets: newWidgetList
             };
         case 'LESSON_SELECT':
-            state.selectedLesson = action.lessonId;
+            state.lessonId = action.lessonId;
                         return state;
         case 'RECHECK':
-            // if (action.lessonId != state.selectedLesson) {
+
+            if (action.lessonId != state.lessonId) {
+                console.log('a' + action.lessonId);
+                console.log('s' + state.lessonId);
+                state.lessonId = action.lessonId;
+                widgetService.changeSel(state.lessonId);
+                console.log(state);
+                return {widgets: state.widgets, lessonId: state.lessonId};
+            } else {
+                return state;
+            }
+            // if (action.lessonId != state.lessonId) {
             //     console.log("rechecked on new");
             //     console.log(state.widgets);
-            //     state.selectedLesson = action.lessonId;
+            //     state.lessonId = action.lessonId;
             //     widgetService.getWidgetsFromLesson(action.lessonId)
             //         .then((response) => {
             //             console.log("response: " + response.toString());
@@ -120,7 +131,7 @@ const WidgetReducer = (state = initialState, action) => {
             //
             //     console.log(state.widgets);
             // }
-            return state;
+
         default: return state;
     }
 }

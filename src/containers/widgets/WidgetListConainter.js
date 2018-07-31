@@ -7,17 +7,11 @@ import WidgetService from '../../services/WidgetSerivce'
 
 
 const stateToPropertyMapper = (state, ownProps) => {
-    let check = ownProps.lesson;
-    //
-    // console.log("ownProps:");
-    // console.log(ownProps);
-    // console.log("state:");
-    // console.log(state);
-    state.lesson = ownProps.lesson;
+
     return {
         widgets: state.widgets,
 
-        lessonId: state.lesson
+        lessonId: ownProps.lessonId
     };
 }
 
@@ -62,10 +56,15 @@ const dispatcherToPropertyMapper = dispatch => {
                 type: 'LESSON_SELECT',
                 lessonId: lessonId
             }),
-            reCheck: (lessonId) => dispatch ({
-                type: 'RECHECK',
-                lessonId: lessonId
-            })
+            reCheck: (lessonId) => {
+                if (widgetService.getCurSel() != lessonId) {
+                    return (dispatch({
+                        type: 'RECHECK',
+                        lessonId: lessonId
+                    }))
+                }
+            }
+
 
         }
     )
